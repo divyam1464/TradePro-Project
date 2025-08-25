@@ -2,14 +2,20 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
 import {
+  Activity,
   ArrowDownRight,
   ArrowUpRight,
+  BarChart2,
   Bell,
   BookOpen,
+  ChevronRight,
   Currency,
+  DollarSign,
   Globe,
+  PieChart,
   Search,
   ShoppingCart,
+  TrendingUp,
   User,
   Zap,
 } from "lucide-react";
@@ -160,6 +166,7 @@ const Marketindices = () => {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 my-4">
       {marketdata.map((index) => (
         <motion.div
+          key={index.name}
           whileHover={{ scale: 1.02 }}
           className="bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
         >
@@ -190,6 +197,137 @@ const Marketindices = () => {
   );
 };
 
+const StockCard = ({
+  name,
+  initialPrice,
+}: {
+  name: String;
+  initialPrice: number;
+}) => {
+  const [price, setprice] = useState(initialPrice);
+  const [change, setchange] = useState(0);
+  const [percentage, setpercentage] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const { change: randomChange, percentagechange: randomPercentChange } =
+        generaterandomvalues(price);
+      setprice((precprice) => precprice + randomChange);
+      setchange(randomChange);
+      setpercentage(randomPercentChange);
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [price]);
+  return (
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      className="bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+    >
+      <h3 className="font-semibold text-white mb-2">{name}</h3>
+      <span className="flex items-center justify-between ">
+        {price.toLocaleString("en-IN", {
+          style: "currency",
+          currency: "INR",
+        })}
+      </span>
+      <motion.span
+        key={change}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        className={`text-sm flex items-center ${
+          change >= 0 ? "text-green-500" : "text-red-500"
+        }`}
+      >
+        {change >= 0 ? (
+          <ArrowUpRight size={16} />
+        ) : (
+          <ArrowDownRight size={16} />
+        )}
+        {percentage.toFixed(2)} ({percentage.toFixed(2)}%)
+      </motion.span>
+    </motion.div>
+  );
+};
+
+const MostBought = () => (
+  <motion.div {...fadeinup} className="my-8">
+    <div className="flex justify-between items-center mb-4 ">
+      <h2 className="text-xl font-semibold text-white">
+        Most Bought on TradePro
+      </h2>
+      <motion.a
+        className="text-blue-500 text-sm hover:underline flex items-center "
+        href="#"
+      >
+        View All <ChevronRight className="ml-1" size={16} />
+      </motion.a>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ">
+      <StockCard name="Reliance Industries Ltd." initialPrice={1413.7} />
+      <StockCard name="Tata Motors Ltd." initialPrice={686.1} />
+      <StockCard name="Adani Energy Solutions Ltd." initialPrice={805.0} />
+      <StockCard name="Swiggy Ltd." initialPrice={427.0} />
+    </div>
+  </motion.div>
+);
+
+const Productandtools = () => {
+  const products = [
+    { name: "F&O", icon: BarChart2 },
+    { name: "IPO", icon: DollarSign },
+    { name: "ETF's", icon: PieChart },
+    { name: "FD's", icon: TrendingUp },
+    { name: "US Stocks", icon: Activity },
+  ];
+  return (
+    <motion.div {...fadeinup} className="my-8">
+      <h2 className="text-xl font-semibold text-white mb-4">
+        Products & Tools
+      </h2>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+        {products.map((product) => (
+          <motion.div
+            whileHover={{ scale: 1.03, backgroundColor: "#2D3748" }}
+            key={product.name}
+            className="bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow text-center cursor-pointer"
+          >
+            <motion.div
+              whileHover={{ rotate: 360 }}
+              className="bg-blue-500 h-12 w-12 rounded-full flex items-center justify-center mx-auto mb-2"
+            >
+              <product.icon className="text-white" />
+            </motion.div>
+            <span className="text-gray-300">{product.name}</span>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
+const Topgainers = () => (
+  <motion.div {...fadeinup} className="my-8">
+    <div className="flex justify-between items-center mb-4 ">
+      <h2 className="text-xl font-semibold text-white">
+        Top Gainers on TradePro
+      </h2>
+      <motion.a
+        className="text-blue-500 text-sm hover:underline flex items-center "
+        href="#"
+      >
+        View All <ChevronRight className="ml-1" size={16} />
+      </motion.a>
+    </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ">
+      <StockCard name="Tata Consultancy Services" initialPrice={3140.6} />
+      <StockCard name="HDFC Bank" initialPrice={1964.1} />
+      <StockCard name="ICICI Bank" initialPrice={1433.2} />
+      <StockCard name="Infosys" initialPrice={1532.1} />
+    </div>
+  </motion.div>
+);
+
 const page = () => {
   return (
     <div className="bg-gray-900 min-h-screen text-gray-300">
@@ -197,6 +335,9 @@ const page = () => {
       <main className="container mx-auto ">
         <Tabsection />
         <Marketindices />
+        <MostBought />
+        <Productandtools />
+        <Topgainers />
       </main>
     </div>
   );
