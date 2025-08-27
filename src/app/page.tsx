@@ -285,7 +285,7 @@ export default function Home() {
               >
                 <Image
                   className="w-full rounded-xl"
-                  src="tradepro\3.jpg"
+                  src="https://www.investopedia.com/thmb/hEGplqJ81l5EKPXtQPHx_usSSoQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Tacticaltrading-6e3d1c5036f042b981b7b82901cba711.jpg"
                   alt="Trading Platform Screenshot"
                   width={800}
                   height={400}
@@ -305,7 +305,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div className="bg-gray-800 p-8 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300 relative overflow-hidden group cursor-pointer">
                 <Image
-                  src="tradepro\2 (1).jpg"
+                  src="https://cdn.corporatefinanceinstitute.com/assets/trading-plan-1024x683.jpeg"
                   alt="Trading Platform Screenshot"
                   width={800}
                   height={400}
