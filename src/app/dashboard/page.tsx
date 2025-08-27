@@ -149,8 +149,8 @@ const generaterandomvalues = (value: number) => {
 const Marketindices = () => {
   const router = useRouter();
   const [marketdata, setmarketdata] = useState([
-    { name: "NIFTY 50", values: 24500.86, change: 0, percentagechange: 0 },
-    { name: "NIFTY BANK", values: 55139.3, change: 0, percentagechange: 0 },
+    { name: "NIFTY_50", values: 24500.86, change: 0, percentagechange: 0 },
+    { name: "NIFTY_BANK", values: 55139.3, change: 0, percentagechange: 0 },
     { name: "SENSEX", values: 81635.91, change: 0, percentagechange: 0 },
   ]);
   useEffect(() => {
