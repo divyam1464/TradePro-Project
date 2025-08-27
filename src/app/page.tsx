@@ -285,7 +285,7 @@ export default function Home() {
               >
                 <Image
                   className="w-full rounded-xl"
-                  src="tradepro\assets\2 (1).jpg"
+                  src="tradepro\3.jpg"
                   alt="Trading Platform Screenshot"
                   width={800}
                   height={400}
@@ -305,7 +305,7 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div className="bg-gray-800 p-8 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300 relative overflow-hidden group cursor-pointer">
                 <Image
-                  src="tradepro\assets\3.jpg"
+                  src="tradepro\2 (1).jpg"
                   alt="Trading Platform Screenshot"
                   width={800}
                   height={400}
