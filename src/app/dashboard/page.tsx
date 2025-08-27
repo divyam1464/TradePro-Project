@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { div, li, span } from "framer-motion/client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 
@@ -49,31 +50,31 @@ const Header = () => {
         <nav className="hidden md:block">
           <ul className="flex space-x-2">
             <li>
-              <a
+              <Link
                 href="/"
                 className="text-blue-500 hover:text-blue-300 transition-colors font-semibold flex items-center cursor-pointer"
               >
                 <Zap className="mr-1" size={16} />
                 Explore
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="/"
                 className="text-blue-500 hover:text-blue-300 transition-colors font-semibold flex items-center cursor-pointer"
               >
                 <Globe className="mr-1" size={16} />
                 Investment
-              </a>
+              </Link>
             </li>
             <li>
-              <a
+              <Link
                 href="/"
                 className="text-blue-500 hover:text-blue-300 transition-colors font-semibold flex items-center cursor-pointer"
               >
                 <BookOpen className="mr-1" size={16} />
                 Learn
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
@@ -266,12 +267,12 @@ const MostBought = () => (
       <h2 className="text-xl font-semibold text-white">
         Most Bought on TradePro
       </h2>
-      <motion.a
+      <Link
         className="text-blue-500 text-sm hover:underline flex items-center "
         href="#"
       >
         View All <ChevronRight className="ml-1" size={16} />
-      </motion.a>
+      </Link>
     </div>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ">
       <StockCard name="Reliance Industries Ltd." initialPrice={1413.7} />
@@ -322,12 +323,12 @@ const Topgainers = () => (
       <h2 className="text-xl font-semibold text-white">
         Top Gainers on TradePro
       </h2>
-      <motion.a
+      <Link
         className="text-blue-500 text-sm hover:underline flex items-center "
         href="#"
       >
         View All <ChevronRight className="ml-1" size={16} />
-      </motion.a>
+      </Link>
     </div>
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 ">
       <StockCard name="Tata Consultancy Services" initialPrice={3140.6} />
