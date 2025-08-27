@@ -12,11 +12,15 @@ import {
   X,
   Zap,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef, useState, ReactNode } from "react";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-const Animatedsection = ({ children }: any) => {
+type AnimatedSectionProps = {
+  children: ReactNode;
+};
+const Animatedsection = ({ children }: AnimatedSectionProps) => {
   const ref = useRef(null);
   const isinview = useInView(ref, { once: true, amount: 0.3 });
   return (
@@ -31,7 +35,13 @@ const Animatedsection = ({ children }: any) => {
   );
 };
 
-const FeatureBox = ({ icon, title, description, delay }: any) => {
+type FeatureBoxProps = {
+  icon: ReactNode;
+  title: string;
+  description: string;
+  delay?: number;
+};
+const FeatureBox = ({ icon, title, description, delay }: FeatureBoxProps) => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <motion.div
@@ -273,11 +283,14 @@ export default function Home() {
                 transition={{ duration: 0.8 }}
                 className="bg-gray-800 p-8 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300 relative overflow-hidden group cursor-pointer"
               >
-                <img
+                <Image
                   className="w-full rounded-xl"
-                  src="https://i.ibb.co/XxFpDvs/3.jpg"
-                  alt="Trading Platform Screenshot" width={200} height={100}
-                ></img>
+                  src="tradepro\assets\2 (1).jpg"
+                  alt="Trading Platform Screenshot"
+                  width={800}
+                  height={400}
+                  priority
+                />
                 <motion.div
                   whileHover={{ opacity: 0.2 }}
                   className="absolute insert-0 bg-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
@@ -291,11 +304,14 @@ export default function Home() {
           <div className="py-20">
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div className="bg-gray-800 p-8 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300 relative overflow-hidden group cursor-pointer">
-                <img
-                  src="https://i.ibb.co/w71CV2s/2.jpg"
-                  alt="Trading Platform Screenshot" width={200} height={100}
+                <Image
+                  src="tradepro\assets\3.jpg"
+                  alt="Trading Platform Screenshot"
+                  width={800}
+                  height={400}
                   className="w-full rounded-xl"
-                ></img>
+                  priority
+                />
                 <motion.div className="absolute insert-0 bg-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
               </div>
               <div>
