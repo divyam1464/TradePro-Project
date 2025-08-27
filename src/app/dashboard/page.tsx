@@ -13,6 +13,7 @@ import {
   DollarSign,
   Globe,
   PieChart,
+  Plus,
   Search,
   ShoppingCart,
   TrendingUp,
@@ -20,6 +21,9 @@ import {
   Zap,
 } from "lucide-react";
 import { div, li, span } from "framer-motion/client";
+import { useRouter } from "next/navigation";
+
+
 
 const fadeinup = {
   initial: { opacity: 0, y: 20 },
@@ -143,6 +147,7 @@ const generaterandomvalues = (value: number) => {
 };
 
 const Marketindices = () => {
+  const router = useRouter();
   const [marketdata, setmarketdata] = useState([
     { name: "NIFTY 50", values: 24500.86, change: 0, percentagechange: 0 },
     { name: "NIFTY BANK", values: 55139.3, change: 0, percentagechange: 0 },
@@ -167,8 +172,10 @@ const Marketindices = () => {
       {marketdata.map((index) => (
         <motion.div
           key={index.name}
-          whileHover={{ scale: 1.02 }}
           className="bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+          whileTap={{scale:0.95}}
+          whileHover={{ scale: 1.02 }}
+          onClick = {()=>router.push(`/dashboard/${index.name}`)}
         >
           <h3 className="font-semibold text-gray-300">{index.name}</h3>
           <div className="flex items-center space-x-2">
@@ -207,6 +214,7 @@ const StockCard = ({
   const [price, setprice] = useState(initialPrice);
   const [change, setchange] = useState(0);
   const [percentage, setpercentage] = useState(0);
+  const router = useRouter();
   useEffect(() => {
     const interval = setInterval(() => {
       const { change: randomChange, percentagechange: randomPercentChange } =
@@ -222,7 +230,9 @@ const StockCard = ({
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}
+      whileTap={{scale:0.95}}
       className="bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+      onClick={()=> router.push(`/dashboard/${name}`)}
     >
       <h3 className="font-semibold text-white mb-2">{name}</h3>
       <span className="flex items-center justify-between ">
@@ -328,6 +338,83 @@ const Topgainers = () => (
   </motion.div>
 );
 
+const TopByMarketCap = () => {
+  const [expandedCompany, setExpandedCompany] = useState<string | null>(null);
+
+  const companies = [
+    { name: "Reliance Industries", marketCap: 1523456.78 },
+    { name: "TCS", marketCap: 1234567.89 },
+    { name: "HDFC Bank", marketCap: 987654.32 },
+    { name: "Infosys", marketCap: 7632.1 },
+    { name: "ICICI Bank", marketCap: 5410.98 },
+  ];
+
+  return (
+    <motion.div {...fadeinup} className="py-8">
+      <h2 className="text-xl font-semibold text-white mb-4">
+        Top by Market Cap
+      </h2>
+      <div className="space-y-4">
+        {companies.map((company) => (
+          <motion.div
+            key={company.name}
+            className="bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+            onClick={() =>
+              setExpandedCompany(
+                expandedCompany === company.name ? null : company.name
+              )
+            }
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="flex justify-between items-center">
+              <span className="text-white">{company.name}</span>
+              <div className="flex items-center space-x-4">
+                <span className="text-gray-300">
+                  ₹{company.marketCap.toFixed(2)} Cr
+                </span>
+                <motion.div
+                  animate={{
+                    rotate: expandedCompany === company.name ? 180 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Plus className="text-blue-500" />
+                </motion.div>
+              </div>
+            </div>
+            <AnimatePresence>
+              {expandedCompany === company.name && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="mt-4 text-gray-300"
+                >
+                  <p>Additional information about {company.name} goes here.</p>
+                  <p>
+                    You can add more details, charts, or any other relevant
+                    data.
+                  </p>
+                  <motion.button
+                    className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-full flex items-center"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    View Details
+                    <ChevronRight size={16} className="ml-1" />
+                  </motion.button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
 const page = () => {
   return (
     <div className="bg-gray-900 min-h-screen text-gray-300">
@@ -338,6 +425,7 @@ const page = () => {
         <MostBought />
         <Productandtools />
         <Topgainers />
+        <TopByMarketCap/>
       </main>
     </div>
   );
