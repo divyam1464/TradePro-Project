@@ -19,6 +19,13 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
     ],
+    rules: {
+      // Example: disable specific rules
+      "no-console": "off",          // allows console.log
+      "react/react-in-jsx-scope": "off", // Next.js doesn't need React import
+      "react/prop-types": "off",    // if you don't use prop-types
+      "@typescript-eslint/no-unused-vars": "off", // ignore unused vars in TS
+    },
   },
 ];
 
