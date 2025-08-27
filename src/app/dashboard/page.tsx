@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Activity,
   ArrowDownRight,
@@ -9,7 +9,6 @@ import {
   Bell,
   BookOpen,
   ChevronRight,
-  Currency,
   DollarSign,
   Globe,
   PieChart,
@@ -20,7 +19,6 @@ import {
   User,
   Zap,
 } from "lucide-react";
-import { div, li, span } from "framer-motion/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -209,7 +207,7 @@ const StockCard = ({
   name,
   initialPrice,
 }: {
-  name: String;
+  name: string;
   initialPrice: number;
 }) => {
   const [price, setprice] = useState(initialPrice);

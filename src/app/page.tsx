@@ -1,8 +1,6 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
-  BarChart,
   BarChart2,
   Bell,
   Book,
@@ -14,7 +12,6 @@ import {
   X,
   Zap,
 } from "lucide-react";
-import Image from "next/image";
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -279,7 +276,7 @@ export default function Home() {
                 <img
                   className="w-full rounded-xl"
                   src="https://i.ibb.co/XxFpDvs/3.jpg"
-                  alt="Trading Platform Screenshot"
+                  alt="Trading Platform Screenshot" width={200} height={100}
                 ></img>
                 <motion.div
                   whileHover={{ opacity: 0.2 }}
@@ -296,7 +293,7 @@ export default function Home() {
               <div className="bg-gray-800 p-8 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300 relative overflow-hidden group cursor-pointer">
                 <img
                   src="https://i.ibb.co/w71CV2s/2.jpg"
-                  alt="Trading Platform Screenshot"
+                  alt="Trading Platform Screenshot" width={200} height={100}
                   className="w-full rounded-xl"
                 ></img>
                 <motion.div className="absolute insert-0 bg-blue-600 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
